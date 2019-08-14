@@ -6,6 +6,9 @@
 
   <maintainer email="alexander.ti.ufv@gmail.com">Alexander S. Barbosa</maintainer>
 
+  <url>https://github.com/AlexanderSilvaB/Robot-One-ROS</url>
+  <author>Alexander S. Barbosa</author>
+
   <license>MIT</license>
 
   <buildtool_depend>catkin</buildtool_depend>
