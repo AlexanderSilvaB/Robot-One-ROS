@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package format="2">
   <name>robot_one</name>
-  <version>0.1.0</version>
+  <version>0.1.1</version>
   <description>This package allows to use the Robot One Framework with ROS. The supported features of the framework includes the simulator and connection with the physical robots</description>
 
   <maintainer email="alexander.ti.ufv@gmail.com">Alexander S. Barbosa</maintainer>

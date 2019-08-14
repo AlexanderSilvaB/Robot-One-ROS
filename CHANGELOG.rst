@@ -2,8 +2,8 @@
 Changelog for package robot_one
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.1.1 (2019-08-14)
+------------------
 * author in package
 * version command
 * Initial commit
