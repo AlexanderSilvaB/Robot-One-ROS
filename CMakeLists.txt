@@ -17,7 +17,7 @@ find_package(catkin REQUIRED COMPONENTS
 )
 
 ## System dependencies are found with CMake's conventions
-find_package(robotOne REQUIRED)
+# find_package(robotOne REQUIRED)
 
 
 ## Uncomment this if the package has a setup.py. This macro ensures
@@ -136,7 +136,7 @@ include_directories(
 # Declare a C++ executable
 # With catkin_make all packages are built within a single CMake context
 # The recommended prefix ensures that target names across packages don't collide
-add_executable(${PROJECT_NAME}_node src/robot_one_node.cpp)
+add_executable(${PROJECT_NAME}_node src/robot_one_node.cpp src/TcpUdpSocket.cpp src/robotOne.cpp)
 
 # Rename C++ executable without prefix
 # The above recommended prefix causes long target names, the following renames the
@@ -151,7 +151,7 @@ add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catk
 # Specify libraries to link a library or executable target against
 target_link_libraries(${PROJECT_NAME}_node
   ${catkin_LIBRARIES}
-  ${robotOne_LIBS}
+  # ${robotOne_LIBS}
 )
 
 #############

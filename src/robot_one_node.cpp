@@ -24,7 +24,8 @@
 
 #include <tf/transform_broadcaster.h>
 
-#include <robotOne/robotOne.h>
+// From https://github.com/AlexanderSilvaB/Robot-One
+#include "robotOne.h"
 
 #define BASE_Z 0.86
 #define SENSORS_X 0.35
@@ -442,6 +443,14 @@ void publishConnected(ros::Publisher& pub)
     pub.publish(msg);
 }
 
+void publishVersion(ros::Publisher& pub)
+{
+    std_msgs::Float32 msg;
+    msg.data = versionRobotOne();
+    pub.publish(msg);
+}
+
+
 void publishPose(tf::TransformBroadcaster& broadcaster, ros::Time& t, ros::Publisher& pub, ros::Publisher& pubX, ros::Publisher& pubY, ros::Publisher& pubTheta)
 {
     if(!handler)
@@ -760,10 +769,10 @@ int main(int argc, char *argv[])
     ros::Subscriber subManualController = n.subscribe("/robotOne/set/controller/manual", 1, manualControllerCallback);
 
     ros::Subscriber subTrace = n.subscribe("/robotOne/set/trace", 1, traceCallback);
-    
 
     // Publishers
     ros::Publisher pubConnected = n.advertise<std_msgs::Bool>("/robotOne/connected", 1);
+    ros::Publisher pubVersion = n.advertise<std_msgs::Float32>("/robotOne/version", 1);
 
     ros::Publisher pubPose = n.advertise<geometry_msgs::Pose2D>("/robotOne/get/pose", 1);
     ros::Publisher pubPoseX = n.advertise<std_msgs::Float32>("/robotOne/get/pose/x", 1);
@@ -823,7 +832,6 @@ int main(int argc, char *argv[])
         connectCallback(connectMsg);
     }
 
-
     ROS_INFO("Running");
     while (ros::ok())
     {
@@ -843,6 +851,7 @@ int main(int argc, char *argv[])
                 tf::Transform(tf::Quaternion(0, 0, 0, 1), tf::Vector3(SENSORS_X, 0.0, CAMERA_Z)),
                 readTime, "base_link", "base_camera"));
 
+        publishVersion(pubVersion);
         publishConnected(pubConnected);
         publishPose(broadcaster, readTime, pubPose, pubPoseX, pubPoseY, pubPoseTheta);
         publishOdometry(pubOdometry, pubOdometryX, pubOdometryY, pubOdometryTheta);
